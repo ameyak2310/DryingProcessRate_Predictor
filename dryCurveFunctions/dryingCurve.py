@@ -14,16 +14,10 @@ def concat(path, TrayW):
 
     frame = pd.concat(list, axis=0, ignore_index=True)
     frame.fillna(0, inplace=True)
-    del list, df, all_files, filename, path
-
-    #frame.head(3)
-    #aFT = [float("%.4f" % (i)) for i in (frame["T_ambient"].tolist())]
-
     frame["W"] = frame["Sample_weight_g"] - TrayW
     frame["t"] = np.linspace(0,10*len(frame),len(frame)+1)[:-1] /3600
-    #print(min(frame["W"]), max(frame["W"])); print(len(frame))
     
-    return frame #["W"], frame["t"]
+    return frame 
 
 
 #frame["err"] = np.exp(-1*0.0214*frame["t"])*27.906
