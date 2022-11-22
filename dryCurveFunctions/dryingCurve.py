@@ -53,7 +53,6 @@ def clean(par, nset):
                 ret[i] = m
     
     return ret
-    del k, temp1, temp3, temp2, m, s, i, e, par
     
 # Generate arrays for MC, MR
 def genMCMR(wRed,exp, exDM):
@@ -61,6 +60,14 @@ def genMCMR(wRed,exp, exDM):
     MC = ( np.array(wRed) - exDM[exp] ) / wRed;   # print(min(MC),max(MC))
     MR = MC / MC[0];                              # print(min(MR),max(MR))
     return MC, MR
+    
+def genRate(wRed,exp, exDM):
+    Water = np.subtract(wRed, exDM[exp]);         # print(min(Water),max(Water))
+    Water_shift_1 = list(Water.copy());
+    Water_shift_1.pop(0);
+    Water_shift_1.append(Water_shift_1[-1]);
+    Rate = (np.array(Water) - np.array(Water_shift_1)) / (10/3600)
+    return Rate
     
     # Plot data
 def WeightVsTime(Time,Weight,xmin,xmax,xint,ymin,ymax,yint ):
